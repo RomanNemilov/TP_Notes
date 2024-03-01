@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/note_bg_light"/>
+            <corners android:bottomRightRadius="0.1dp"
+                android:bottomLeftRadius="0.1dp"
+                android:topLeftRadius="8dp"
+                android:topRightRadius="8dp"/>
+        </shape>
+    </item>
+    <item android:height="8dp">
+        <shape>
+            <solid android:color="@color/note_bg_header_light"/>
+
+            <corners android:bottomRightRadius="0.1dp"
+                android:bottomLeftRadius="0.1dp"
+                android:topLeftRadius="8dp"
+                android:topRightRadius="8dp"/>
+        </shape>
+    </item>
+</layer-list>
