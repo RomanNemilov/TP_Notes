@@ -3,8 +3,8 @@
     <item>
         <shape>
             <solid android:color="@color/note_bg_light"/>
-            <corners android:bottomRightRadius="0.1dp"
-                android:bottomLeftRadius="0.1dp"
+            <corners android:bottomRightRadius="8dp"
+                android:bottomLeftRadius="8dp"
                 android:topLeftRadius="8dp"
                 android:topRightRadius="8dp"/>
         </shape>
