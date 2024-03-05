@@ -48,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFABAdd_click(View view){
+        Note note
+        db.execSQL("INSERT INTO " + DbHelper.TABLE_NOTES +
+                "(" + DbHelper.NOTES_TITLE + ", " +
+                DbHelper.NOTES_BODY + ")" +
+                "VALUES" + );
         Intent intent = new Intent(this, EditActivity.class);
         startActivity(intent);
     }
