@@ -11,6 +11,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.material.carousel.CarouselLayoutManager;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(DbHelper.NOTES_TITLE, note.getTitle());
         values.put(DbHelper.NOTES_BODY, note.getBody());
-        db.insert(DbHelper.TABLE_NOTES, null, values);
+        long id = db.insert(DbHelper.TABLE_NOTES, null, values);
+        note.setId(id);
         Intent intent = new Intent(this, EditActivity.class);
         intent.putExtra("note", note);
         startActivity(intent);
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         notes.clear();
         cursor = db.rawQuery("SELECT * FROM " + DbHelper.TABLE_NOTES, null);
         while (cursor.moveToNext()){
-            notes.add(new Note(cursor.getString(1), cursor.getString(2)));
+            notes.add(new Note(cursor.getLong(0), cursor.getString(1), cursor.getString(2)));
         }
     }
     private void updateManager(){

@@ -6,19 +6,20 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class Note implements Parcelable {
-    private int id;
+    private long id;
     private String title = "";
     private String body = "";
     public Note() {
     }
-    public Note(String header, String body) {
+    public Note(Long id, String header, String body) {
+        this.id = id;
         this.title = header;
         this.body = body;
     }
 
 
     protected Note(Parcel in) {
-        id = in.readInt();
+        id = in.readLong();
         title = in.readString();
         body = in.readString();
     }
@@ -30,7 +31,7 @@ public class Note implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
-        parcel.writeInt(id);
+        parcel.writeLong(id);
         parcel.writeString(title);
         parcel.writeString(body);
     }
@@ -46,11 +47,11 @@ public class Note implements Parcelable {
         }
     };
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
