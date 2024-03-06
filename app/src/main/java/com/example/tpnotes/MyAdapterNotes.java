@@ -33,7 +33,7 @@ public class MyAdapterNotes  extends RecyclerView.Adapter<MyAdapterNotes.MyViewH
     public void onBindViewHolder(@NonNull MyViewHolderNotes holder, int position) {
         Note note = notes.get(position);
         holder.id = note.getId();
-        holder.tvHeader.setText(note.getHeader());
+        holder.tvTitle.setText(note.getTitle());
         holder.tvBody.setText(note.getBody());
     }
 
@@ -44,11 +44,11 @@ public class MyAdapterNotes  extends RecyclerView.Adapter<MyAdapterNotes.MyViewH
 
     public class MyViewHolderNotes extends RecyclerView.ViewHolder {
         int id;
-        public TextView tvHeader, tvBody;
+        public TextView tvTitle, tvBody;
 
         public MyViewHolderNotes(@NonNull View itemView) {
             super(itemView);
-            tvHeader = itemView.findViewById(R.id.tvHeader);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
             tvBody = itemView.findViewById(R.id.tvBody);
         }
     }

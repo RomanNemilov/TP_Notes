@@ -1,11 +1,10 @@
 package com.example.tpnotes;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     DbHelper dbHelper;
     SQLiteDatabase db;
     Cursor cursor;
+    String defaultTitle;
 
 //    private ActivityResultLauncher<Intent> launcher =
 //        registerForActivityResult( new ActivityResultContracts.StartActivityForResult(),
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         db = dbHelper.getWritableDatabase();
 
         rvNotes = findViewById(R.id.rvNotes);
+        defaultTitle = getResources().getString(R.string.untitled);
 
 
         rvNotes.setLayoutManager(new LinearLayoutManager(this));
@@ -48,12 +49,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFABAdd_click(View view){
-        Note note
-        db.execSQL("INSERT INTO " + DbHelper.TABLE_NOTES +
-                "(" + DbHelper.NOTES_TITLE + ", " +
-                DbHelper.NOTES_BODY + ")" +
-                "VALUES" + );
+        Note note = new Note(defaultTitle);
+        ContentValues values = new ContentValues();
+        values.put(DbHelper.NOTES_TITLE, note.getTitleForDB());
+        values.put(DbHelper.NOTES_BODY, note.getBody());
+        db.insert(DbHelper.TABLE_NOTES, null, values);
         Intent intent = new Intent(this, EditActivity.class);
+        intent.putExtra("note", note);
         startActivity(intent);
     }
 
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         notes.clear();
         cursor = db.rawQuery("SELECT * FROM " + DbHelper.TABLE_NOTES, null);
         while (cursor.moveToNext()){
-            notes.add(new Note(cursor.getString(0), cursor.getString(1)));
+            notes.add(new Note(cursor.getString(1), defaultTitle, cursor.getString(2)));
         }
     }
     private void updateManager(){
