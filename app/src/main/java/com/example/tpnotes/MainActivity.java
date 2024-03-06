@@ -44,14 +44,18 @@ public class MainActivity extends AppCompatActivity {
 
 
         rvNotes.setLayoutManager(new LinearLayoutManager(this));
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         updateNotes();
     }
 
     public void onFABAdd_click(View view){
-        Note note = new Note(defaultTitle);
+        Note note = new Note();
         ContentValues values = new ContentValues();
-        values.put(DbHelper.NOTES_TITLE, note.getTitleForDB());
+        values.put(DbHelper.NOTES_TITLE, note.getTitle());
         values.put(DbHelper.NOTES_BODY, note.getBody());
         db.insert(DbHelper.TABLE_NOTES, null, values);
         Intent intent = new Intent(this, EditActivity.class);
@@ -68,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         notes.clear();
         cursor = db.rawQuery("SELECT * FROM " + DbHelper.TABLE_NOTES, null);
         while (cursor.moveToNext()){
-            notes.add(new Note(cursor.getString(1), defaultTitle, cursor.getString(2)));
+            notes.add(new Note(cursor.getString(1), cursor.getString(2)));
         }
     }
     private void updateManager(){

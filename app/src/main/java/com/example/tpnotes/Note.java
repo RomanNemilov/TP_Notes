@@ -8,14 +8,11 @@ import androidx.annotation.NonNull;
 public class Note implements Parcelable {
     private int id;
     private String title = "";
-    private String defaultTitle;
     private String body = "";
-    public Note(String defaultTitle) {
-        this.defaultTitle = defaultTitle;
+    public Note() {
     }
-    public Note(String header, String defaultTitle, String body) {
+    public Note(String header, String body) {
         this.title = header;
-        this.defaultTitle = defaultTitle;
         this.body = body;
     }
 
@@ -23,7 +20,6 @@ public class Note implements Parcelable {
     protected Note(Parcel in) {
         id = in.readInt();
         title = in.readString();
-        defaultTitle = in.readString();
         body = in.readString();
     }
 
@@ -36,7 +32,6 @@ public class Note implements Parcelable {
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeInt(id);
         parcel.writeString(title);
-        parcel.writeString(defaultTitle);
         parcel.writeString(body);
     }
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -62,8 +57,7 @@ public class Note implements Parcelable {
     public String getTitle() {
         return title;
     }
-
-    public String getTitleForDB() {
+    public String getTitleOrDefault(String defaultTitle){
         if (title.trim().isEmpty()) return defaultTitle;
         return title;
     }

@@ -15,10 +15,12 @@ public class MyAdapterNotes  extends RecyclerView.Adapter<MyAdapterNotes.MyViewH
 
     private Context context;
     private ArrayList<Note> notes;
+    private String defaultTitle;
 
     public MyAdapterNotes(Context context, ArrayList<Note> notes) {
         this.context = context;
         this.notes = notes;
+        defaultTitle = ((MainActivity)context).defaultTitle;
     }
 
     @NonNull
@@ -33,7 +35,7 @@ public class MyAdapterNotes  extends RecyclerView.Adapter<MyAdapterNotes.MyViewH
     public void onBindViewHolder(@NonNull MyViewHolderNotes holder, int position) {
         Note note = notes.get(position);
         holder.id = note.getId();
-        holder.tvTitle.setText(note.getTitle());
+        holder.tvTitle.setText(note.getTitleOrDefault(defaultTitle));
         holder.tvBody.setText(note.getBody());
     }
 
