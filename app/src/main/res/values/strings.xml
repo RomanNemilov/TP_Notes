@@ -3,4 +3,9 @@
     <string name="untitled">Без названия</string>
     <string name="notes">Заметки</string>
     <string name="placeholder">...</string>
+    <string name="confirm_delete_message">Это действие невозможно отменить</string>
+    <string name="confirm_delete_title">Вы действительно хотите удалить заметку?</string>
+    <string name="confirm">Да</string>
+    <string name="cancel">Отмена</string>
+
 </resources>
